@@ -31,7 +31,8 @@ def modifyPlatforms(platforms):
     for i in range(len(platforms)):
         if(platforms[i].x < -platforms[i].width):
             platforms.pop(i)
-            spawnPlatforms(platforms);
+            if(len(platforms) < 3):
+                spawnPlatforms(platforms)
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
