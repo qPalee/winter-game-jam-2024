@@ -18,6 +18,6 @@ class Platform:
 
     def collides(self, player):
         platform_rect = pygame.Rect(self.x, self.y, self.width, self.height)
-        player_rect = pygame.Rect(player.x, player.y + player.height - 20, player.width, 20)
+        player_rect = pygame.Rect(player.x, player.y + player.height - 30, player.width, 30)
 
         return (platform_rect.colliderect(player_rect))

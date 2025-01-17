@@ -14,18 +14,21 @@ def spawnPlatforms(platforms):
     
     rng_number = random.random()
     if(rng_number < 0.5): # 50% chance to spawn 1 platform
-        platforms.append(Platform(random.randint(520, 800), random.randint(256, 384)))
+        platforms.append(Platform(random.randint(520, 800), random.randint(384, 512)))
+        print(1)
         return
     
     if(rng_number < 0.8): # 0.5 < rng_number < 0.8 -> 30% chance to spawn 2 platforms
-        platforms.append(Platform(random.randint(520, 800), random.randint(256, 384)))
-        platforms.append(Platform(random.randint(820, 1024), random.randint(384, 512)))
+        platforms.append(Platform(random.randint(520, 800), random.randint(384, 512)))
+        platforms.append(Platform(random.randint(820, 1024), random.randint(256, 384)))
+        print(2)
         return
     
     # rng_number > 0.8 -> 20% chance to spawn 3 platforms
-    platforms.append(Platform(random.randint(520, 800), random.randint(256, 384)))
+    platforms.append(Platform(random.randint(520, 800), random.randint(384, 512)))
     platforms.append(Platform(random.randint(820, 1024), random.randint(384, 512)))
-    platforms.append(Platform(random.randint(1200, 1300), random.randint(384, 512)))
+    platforms.append(Platform(random.randint(1200, 1300), random.randint(256, 384)))
+    print(3)
 
 def modifyPlatforms(platforms):
     for i in range(len(platforms)):
@@ -58,20 +61,21 @@ while running:
 
     keys = pygame.key.get_pressed()
     mods = pygame.key.get_mods()
+    #print(player.on_ground)
 
     player.calculateSpeed(keys)
     player.move(screen)
 
     modifyPlatforms(platforms)
 
+    player.on_ground = False
     for p in platforms:
         p.move(-player.x_velocity)
-        if(p.collides(player) and player.y_velocity > 0):
+        if(p.collides(player) and player.y_velocity >= 0):
+            print(random.random())
             player.y = p.y - player.height + 1
             player.y_velocity = 0
             player.on_ground = True
-        else:
-            player.on_ground = False
 
     if(floor.collides(player, screen)):
         player.y = floor.y - player.height + 1
