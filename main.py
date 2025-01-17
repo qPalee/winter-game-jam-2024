@@ -33,6 +33,7 @@ def modifyPlatforms(platforms):
             platforms.pop(i)
             if(len(platforms) < 3):
                 spawnPlatforms(platforms)
+            return
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
@@ -60,6 +61,8 @@ while running:
 
     player.calculateSpeed(keys)
     player.move(screen)
+
+    modifyPlatforms(platforms)
 
     for p in platforms:
         p.move(-player.x_velocity)
